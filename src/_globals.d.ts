@@ -35,10 +35,10 @@ declare global {
 			hireable: boolean;
 			bio: string;
 			twitter_username: string | null;
-			public_repos: numnrt;
-			public_gists: numnrt;
-			followers: numnrt;
-			following: numnrt;
+			public_repos: number;
+			public_gists: number;
+			followers: number;
+			following: number;
 			created_at: string;
 			updated_at: string;
 		}
