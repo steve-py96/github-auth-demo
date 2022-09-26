@@ -26,10 +26,10 @@ A user visits `http://localhost:5173` - which executes [src/routes/+page.server.
 
 ## User is logged in
 
-The user sees a logout link (`http://localhost:5173/logout`) which deletes the authorization cookie and redirects to `http://localhost:5173`.
+The user sees a logout link (`http://localhost:5173/logout`, see [src/routes/logout/+server.ts](src/routes/logout/+server.ts)) which deletes the authorization cookie and redirects to `http://localhost:5173`.
 
 ## User is not logged in
 
-The user sees a login link (`http://localhost:5173/login`) which redirects to `https://github.com/login/oauth/authorize` with the github client_id and the generated state as query parameters. After logging in github redirects the user to `http://localhost:5173/callback` which validates the given code and the state provided by github, state should be the generated state and code is the login token (note: without lifetime limit!). If any errors appear the user is redirected to `http://localhost:5173` with an error.
+The user sees a login link (`http://localhost:5173/login`, see [src/routes/login/+server.ts](src/routes/login/+server.ts)) which redirects to `https://github.com/login/oauth/authorize` with the github client_id and the generated state as query parameters. After logging in github redirects the user to `http://localhost:5173/callback` (see [src/routes/callback/+server.ts](src/routes/callback/+server.ts)) which validates the given code and the state provided by github, state should be the generated state and code is the login token (note: without lifetime limit!). If any errors appear the user is redirected to `http://localhost:5173` with an error.
 Without errors the user is redirected to `http://localhost:5173` + a `Set-Cookie` header in the response where we store the name of the user within a generated [JWT](https://jwt.io).
 On `http://localhost:5173` [src/routes/+page.server.ts](src/routes/+page.server.ts) now detects the cookie and can extract the name from the JWT!
